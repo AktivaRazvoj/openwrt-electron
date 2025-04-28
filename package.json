@@ -1,0 +1,61 @@
+{
+  "name": "openwrt-electron",
+  "version": "1.0.0",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "build": "webpack",
+    "dist": "npm run build && electron-builder"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "electron-updater": "^6.6.2",
+    "node-ssh": "^13.2.1",
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.26.10",
+    "@babel/preset-env": "^7.26.9",
+    "@babel/preset-react": "^7.26.3",
+    "babel-loader": "^10.0.0",
+    "css-loader": "^7.1.2",
+    "electron": "^35.2.1",
+    "electron-builder": "^26.0.12",
+    "style-loader": "^4.0.0",
+    "webpack": "^5.99.7",
+    "webpack-cli": "^6.0.1"
+  },
+  "build": {
+    "appId": "com.aktiva.varovanje",
+    "productName": "AKTIVA-Varovanje",
+    "files": [
+      "public/**/*",
+      "main.js",
+      "preload.js",
+      "src/api.js"
+    ],
+    "directories": {
+      "buildResources": "assets"
+    },
+    "win": {
+      "target": "nsis"
+    },
+    "mac": {
+      "target": "dmg"
+    },
+    "linux": {
+      "target": "AppImage"
+    },
+    "publish": [
+      {
+        "provider": "github",
+        "owner": "AktivaRazvoj",
+        "repo": "openwrt-electron"
+      }
+    ]
+  }
+}
