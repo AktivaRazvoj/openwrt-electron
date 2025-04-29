@@ -31,7 +31,7 @@
   },
   "build": {
     "appId": "com.aktiva.varovanje",
-    "productName": "AKTIVA-Varovanje",
+    "productName": "AKTIVA-Varovanje-razvoj",
     "files": [
       "public/**/*",
       "main.js",
