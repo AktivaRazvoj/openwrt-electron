@@ -10,13 +10,15 @@ function createWindow() {
   const win = new BrowserWindow({
     width: 1000,
     height: 700,
-    resizable:false,
+    resizable: false,
+    autoHideMenuBar: true,
     webPreferences: {
       preload: path.join(__dirname, 'preload.js'),
       contextIsolation: true,
     },
   });
 
+  win.setMenuBarVisibility(false);
   win.loadFile('public/index.html');
 }
 
@@ -30,24 +32,24 @@ app.whenReady().then(() => {
   autoUpdater.on('update-available', () => {
     dialog.showMessageBox({
       type: 'info',
-      title: 'Update available',
-      message: 'A new version is available. Downloading now...',
+      title: 'Na voljo je posodobitev',
+      message: 'Na voljo je nova različica. Prenašam ...',
     });
   });
 
   autoUpdater.on('update-downloaded', () => {
     dialog.showMessageBox({
       type: 'info',
-      title: 'Update ready',
-      message: 'A new version has been downloaded. Restart to install?',
-      buttons: ['Restart', 'Later'],
+      title: 'Posodobitev pripravljena',
+      message: 'Nova različica je bila prenesena. Želite ponovno zagnati za namestitev?',
+      buttons: ['Ponovni zagon', 'Kasneje'],
     }).then(result => {
       if (result.response === 0) autoUpdater.quitAndInstall();
     });
   });
 
   autoUpdater.on('error', (err) => {
-    dialog.showErrorBox('Update error', err == null ? "unknown" : (err.stack || err).toString());
+    dialog.showErrorBox('Napaka pri posodobitvi', err == null ? "neznano" : (err.stack || err).toString());
   });
 });
 

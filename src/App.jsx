@@ -2,10 +2,10 @@ import React, { useState } from 'react';
 import ChangeIPModal from './ChangeIPModal';
 
 const menuItems = [
-  { key: 'basic', label: 'Osnove informacije' },
-  { key: 'network', label: 'Network info' },
-  { key: 'wireless', label: 'Wireless info' },
-  { key: 'log', label: 'Log' },
+  { key: 'basic', label: 'Osnovne informacije' },
+  { key: 'network', label: 'Omrežne informacije' },
+  { key: 'wireless', label: 'Brezžične informacije' },
+  { key: 'log', label: 'Dnevnik' },
   { key: 'devices', label: 'Povezane naprave' },
   { key: 'changeip', label: 'Spremeni IP', danger: true },
 ];
@@ -23,14 +23,14 @@ export default function App() {
   const [showChangeIP, setShowChangeIP] = useState(false);
 
   const connect = async () => {
-    setStatus('connecting...');
+    setStatus('povezovanje...');
     const res = await window.electronAPI.sendSSHCommand('connect', {
       host: ip,
       port,
       username,
       password,
     });
-    setStatus(res.status === 'connected' ? 'connected' : 'error');
+    setStatus(res.status === 'connected' ? 'povezano' : 'napaka');
   };
 
   const handleMenuClick = async (key) => {
@@ -40,30 +40,30 @@ export default function App() {
       return;
     }
     let cmd = '';
-    setContent('Loading...');
+    setContent('Nalagam...');
     if (key === 'basic') {
       const up = await window.electronAPI.sendSSHCommand('run', { command: 'uptime' });
       const df = await window.electronAPI.sendSSHCommand('run', { command: 'df -h' });
-      setContent(`--- Basic Information ---\nUptime: ${up.stdout}\n\nDisk Space:\n${df.stdout}\n---------------------------`);
+      setContent(`--- Osnovne informacije ---\nČas delovanja: ${up.stdout}\n\nDiskovni prostor:\n${df.stdout}\n---------------------------`);
     } else if (key === 'network') {
       const res = await window.electronAPI.sendSSHCommand('run', { command: 'ifconfig' });
-      setContent(`--- Network Interfaces ---\n${res.stdout}\n----------------------------`);
+      setContent(`--- Omrežni vmesniki ---\n${res.stdout}\n----------------------------`);
     } else if (key === 'wireless') {
       const res = await window.electronAPI.sendSSHCommand('run', { command: 'iwinfo' });
-      setContent(`--- Wireless Information ---\n${res.stdout}\n----------------------------`);
+      setContent(`--- Brezžične informacije ---\n${res.stdout}\n----------------------------`);
     } else if (key === 'log') {
       const res = await window.electronAPI.sendSSHCommand('run', { command: 'logread' });
-      setContent(`--- System Log ---\n${res.stdout}\n------------------`);
+      setContent(`--- Sistemsi dnevnik ---\n${res.stdout}\n------------------`);
     } else if (key === 'devices') {
       const res = await window.electronAPI.sendSSHCommand('get_dhcp_leases');
       if (res.leases && res.leases.length) {
         setContent(
-          `--- Connected Devices ---\nIP Address      MAC Address       Hostname\n` +
+          `--- Povezane naprave ---\nIP naslov      MAC naslov        Ime naprave\n` +
           res.leases.map(l => `${l.ip.padEnd(15)} ${l.mac.padEnd(18)} ${l.hostname}`).join('\n') +
           `\n---------------------------`
         );
       } else {
-        setContent('No connected devices found.');
+        setContent('Ni najdenih povezanih naprav.');
       }
     }
   };
@@ -93,16 +93,16 @@ export default function App() {
             <label>IP naslov
               <input value={ip} onChange={e => setIp(e.target.value)} />
             </label>
-            <label>Port
+            <label>Vrata
               <input value={port} onChange={e => setPort(Number(e.target.value))} />
             </label>
-            <label>Username
+            <label>Uporabniško ime
               <input value={username} onChange={e => setUsername(e.target.value)} />
             </label>
-            <label>Password
+            <label>Geslo
               <input type="password" value={password} onChange={e => setPassword(e.target.value)} />
             </label>
-            <button className="connect-btn" onClick={connect}>Connect</button>
+            <button className="connect-btn" onClick={connect}>Poveži</button>
             <span className={`status ${status}`}>Status: {status}</span>
           </div>
         </section>

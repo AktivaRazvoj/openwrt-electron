@@ -27824,16 +27824,16 @@ function _arrayWithHoles(r) { if (Array.isArray(r)) return r; }
 
 var menuItems = [{
   key: 'basic',
-  label: 'Osnove informacije'
+  label: 'Osnovne informacije'
 }, {
   key: 'network',
-  label: 'Network info'
+  label: 'Omrežne informacije'
 }, {
   key: 'wireless',
-  label: 'Wireless info'
+  label: 'Brezžične informacije'
 }, {
   key: 'log',
-  label: 'Log'
+  label: 'Dnevnik'
 }, {
   key: 'devices',
   label: 'Povezane naprave'
@@ -27882,7 +27882,7 @@ function App() {
       return _regeneratorRuntime().wrap(function _callee$(_context) {
         while (1) switch (_context.prev = _context.next) {
           case 0:
-            setStatus('connecting...');
+            setStatus('povezovanje...');
             _context.next = 3;
             return window.electronAPI.sendSSHCommand('connect', {
               host: ip,
@@ -27892,7 +27892,7 @@ function App() {
             });
           case 3:
             res = _context.sent;
-            setStatus(res.status === 'connected' ? 'connected' : 'error');
+            setStatus(res.status === 'connected' ? 'povezano' : 'napaka');
           case 5:
           case "end":
             return _context.stop();
@@ -27918,7 +27918,7 @@ function App() {
             return _context2.abrupt("return");
           case 4:
             cmd = '';
-            setContent('Loading...');
+            setContent('Nalagam...');
             if (!(key === 'basic')) {
               _context2.next = 16;
               break;
@@ -27935,7 +27935,7 @@ function App() {
             });
           case 12:
             df = _context2.sent;
-            setContent("--- Basic Information ---\nUptime: ".concat(up.stdout, "\n\nDisk Space:\n").concat(df.stdout, "\n---------------------------"));
+            setContent("--- Osnovne informacije ---\n\u010Cas delovanja: ".concat(up.stdout, "\n\nDiskovni prostor:\n").concat(df.stdout, "\n---------------------------"));
             _context2.next = 42;
             break;
           case 16:
@@ -27949,7 +27949,7 @@ function App() {
             });
           case 19:
             res = _context2.sent;
-            setContent("--- Network Interfaces ---\n".concat(res.stdout, "\n----------------------------"));
+            setContent("--- Omre\u017Eni vmesniki ---\n".concat(res.stdout, "\n----------------------------"));
             _context2.next = 42;
             break;
           case 23:
@@ -27963,7 +27963,7 @@ function App() {
             });
           case 26:
             _res = _context2.sent;
-            setContent("--- Wireless Information ---\n".concat(_res.stdout, "\n----------------------------"));
+            setContent("--- Brez\u017Ei\u010Dne informacije ---\n".concat(_res.stdout, "\n----------------------------"));
             _context2.next = 42;
             break;
           case 30:
@@ -27977,7 +27977,7 @@ function App() {
             });
           case 33:
             _res2 = _context2.sent;
-            setContent("--- System Log ---\n".concat(_res2.stdout, "\n------------------"));
+            setContent("--- Sistemsi dnevnik ---\n".concat(_res2.stdout, "\n------------------"));
             _context2.next = 42;
             break;
           case 37:
@@ -27990,11 +27990,11 @@ function App() {
           case 40:
             _res3 = _context2.sent;
             if (_res3.leases && _res3.leases.length) {
-              setContent("--- Connected Devices ---\nIP Address      MAC Address       Hostname\n" + _res3.leases.map(function (l) {
+              setContent("--- Povezane naprave ---\nIP naslov      MAC naslov        Ime naprave\n" + _res3.leases.map(function (l) {
                 return "".concat(l.ip.padEnd(15), " ").concat(l.mac.padEnd(18), " ").concat(l.hostname);
               }).join('\n') + "\n---------------------------");
             } else {
-              setContent('No connected devices found.');
+              setContent('Ni najdenih povezanih naprav.');
             }
           case 42:
           case "end":
@@ -28038,17 +28038,17 @@ function App() {
     onChange: function onChange(e) {
       return setIp(e.target.value);
     }
-  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("label", null, "Port", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("input", {
+  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("label", null, "Vrata", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("input", {
     value: port,
     onChange: function onChange(e) {
       return setPort(Number(e.target.value));
     }
-  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("label", null, "Username", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("input", {
+  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("label", null, "Uporabni\u0161ko ime", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("input", {
     value: username,
     onChange: function onChange(e) {
       return setUsername(e.target.value);
     }
-  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("label", null, "Password", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("input", {
+  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("label", null, "Geslo", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("input", {
     type: "password",
     value: password,
     onChange: function onChange(e) {
@@ -28057,7 +28057,7 @@ function App() {
   })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
     className: "connect-btn",
     onClick: connect
-  }, "Connect"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("span", {
+  }, "Pove\u017Ei"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("span", {
     className: "status ".concat(status)
   }, "Status: ", status))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("section", {
     className: "content-area"
@@ -28178,7 +28178,7 @@ function ChangeIPModal(_ref) {
     className: "modal-bg"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
     className: "modal"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h2", null, "Spremeni IP"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("label", null, "Interface:", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("select", {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h2", null, "Spremeni IP"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("label", null, "Vmesnik:", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("select", {
     value: selected,
     onChange: function onChange(e) {
       return setSelected(e.target.value);
@@ -28188,12 +28188,12 @@ function ChangeIPModal(_ref) {
       key: iface,
       value: iface
     }, iface);
-  }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("label", null, "New IP:", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("input", {
+  }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("label", null, "Nov IP:", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("input", {
     value: ip,
     onChange: function onChange(e) {
       return setIp(e.target.value);
     }
-  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("label", null, "New Netmask:", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("input", {
+  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("label", null, "Nova maska:", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("input", {
     value: netmask,
     onChange: function onChange(e) {
       return setNetmask(e.target.value);
@@ -28205,12 +28205,12 @@ function ChangeIPModal(_ref) {
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
     onClick: handleChange,
     disabled: loading
-  }, "Apply"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
+  }, "Potrdi"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
     onClick: onClose,
     style: {
       marginLeft: 8
     }
-  }, "Cancel")), msg && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+  }, "Prekli\u010Di")), msg && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
     style: {
       marginTop: 10,
       color: '#a33'
