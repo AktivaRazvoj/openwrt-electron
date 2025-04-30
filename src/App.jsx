@@ -33,6 +33,7 @@ export default function App() {
     setStatus(res.status === 'connected' ? 'povezano' : 'napaka');
   };
 
+  
   const handleMenuClick = async (key) => {
     setSelected(key);
     if (key === 'changeip') {
