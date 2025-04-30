@@ -24,8 +24,17 @@ jobs:
       - name: Build Electron app (unpacked only)
         run: npx electron-builder --win --x64 --dir --publish=never
 
+      - name: Build Electron app (installer)
+        run: npx electron-builder --win --x64 --publish=never
+
       - name: Upload Unpacked Executable
         uses: actions/upload-artifact@v4
         with:
           name: electron-executable
           path: dist/win-unpacked/AKTIVA-Varovanje.exe
+
+      - name: Upload Installer
+        uses: actions/upload-artifact@v4
+        with:
+          name: aktiva-usmerjevalnik-installer
+          path: dist/*.exe

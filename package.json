@@ -12,7 +12,7 @@
   "license": "ISC",
   "description": "",
   "dependencies": {
-    "electron-updater": "^6.6.2",
+
     "node-ssh": "^13.2.1",
     "react": "^19.1.0",
     "react-dom": "^19.1.0"
@@ -42,20 +42,14 @@
       "buildResources": "assets"
     },
     "win": {
-      "target": "nsis"
+      "target": "nsis",
+      "icon": "assets/icon.ico"
     },
     "mac": {
       "target": "dmg"
     },
     "linux": {
       "target": "AppImage"
-    },
-    "publish": [
-      {
-        "provider": "github",
-        "owner": "AktivaRazvoj",
-        "repo": "openwrt-electron"
-      }
-    ]
+    }
   }
 }
